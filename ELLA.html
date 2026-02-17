@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ELLA</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer; 
+}
+
+
+.wrapper{
+    position:relative;
+    width:600px;
+    height:900px;
+}
+
+
+.layer{
+    position:absolute;
+    inset:0;
+
+    font-size:5px;
+    line-height:9px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-align:justify;
+
+    background:
+        linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)),
+        url("Image.jpg");
+
+    background-size:cover;
+    background-position:center top;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+
+.layer.depth{
+    transform:translate(4px,4px);
+    filter:blur(2px) brightness(40%);
+}
+
+.layer.main{
+    filter:grayscale(100%) contrast(180%) brightness(115%);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+    <div class="layer depth" id="textDepth"></div>
+    <div class="layer main" id="textMain"></div>
+</div>
+
+<audio id="bgMusic" loop style="display:none">
+    <source src="panaginip.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+
+let sentence = "Elegance in silence mystery in motion beauty shaped by light and shadow flowing through timeless grace. ";
+let text = "";
+while(text.length < 60000){
+    text += sentence;
+}
+
+document.getElementById("textDepth").innerText = text;
+document.getElementById("textMain").innerText = text;
+
+
+const music = document.getElementById("bgMusic");
+document.body.addEventListener("click", function playMusicOnce() {
+    music.play().catch(err => console.log(err));
+    document.body.removeEventListener("click", playMusicOnce); 
+});
+</script>
+
+</body>
+</html>
